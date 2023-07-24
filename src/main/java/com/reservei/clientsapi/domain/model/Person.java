@@ -1,6 +1,5 @@
 package com.reservei.clientsapi.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,18 +10,30 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-@Table(name = "person")
-@Entity(name = "Person")
+@MappedSuperclass
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
     private Long id;
+
+    @Column
     private String name;
+
+    @Column
     private String email;
+
+    @Column
     private String role;
+
+    @Column(name = "created_at")
     private LocalDate createdAt;
+
+    @Column(name = "updated_at")
     private LocalDate updatedAt;
+
+    @Column(name = "deleted_at")
     private LocalDate deletedAt;
 
 }

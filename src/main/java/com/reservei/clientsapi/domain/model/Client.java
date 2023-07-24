@@ -12,14 +12,7 @@ import lombok.*;
 @Entity(name = "Client")
 public class Client extends Person {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String cpf;
     private String phone;
     private String rg;
-
-    @OneToOne
-    @JoinColumn(name = "person_id")
-    private Person person;
 }
