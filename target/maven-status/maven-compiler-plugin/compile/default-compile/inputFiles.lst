@@ -1,0 +1,13 @@
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/ClientsApiApplication.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/ClientService.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/AdminData.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/controller/ClientController.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/dto/ClientDto.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Client.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Admin.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/AdminRepository.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Person.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/ClientData.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/ClientRepository.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/PersonRepository.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/AdminService.java
