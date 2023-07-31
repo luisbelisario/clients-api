@@ -1,6 +1,7 @@
 package com.reservei.clientsapi.controller;
 
 import com.reservei.clientsapi.domain.dto.ClientDto;
+import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.record.ClientData;
 import com.reservei.clientsapi.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,27 @@ public class ClientController {
     @GetMapping("/{id}")
     public ResponseEntity<ClientDto> findById(@PathVariable Long id) {
         ClientDto dto = clientService.findById(id);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ClientDto> updateById(@PathVariable Long id, @RequestBody ClientData data) {
+        ClientDto dto = clientService.updateById(id, data);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<MessageDto> reactivateById(@PathVariable Long id) {
+        MessageDto dto = clientService.reactivateById(id);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<MessageDto> deleteById(@PathVariable Long id) {
+        MessageDto dto = clientService.deleteById(id);
 
         return ResponseEntity.ok().body(dto);
     }
