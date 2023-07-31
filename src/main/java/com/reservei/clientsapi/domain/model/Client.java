@@ -31,4 +31,15 @@ public class Client extends Person {
 
         return client;
     }
+
+    public static Client updateClient(Client client, ClientData data) {
+        client.setName(data.name());
+        client.setEmail(data.email());
+        client.setCpf(data.cpf());
+        client.setPhone(data.phone());
+        client.setRg(data.rg());
+        client.setUpdatedAt(LocalDate.now());
+
+        return client;
+    }
 }
