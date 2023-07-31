@@ -11,3 +11,4 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/ClientRepository.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/PersonRepository.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/AdminService.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/dto/MessageDto.java
