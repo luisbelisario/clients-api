@@ -1,4 +1,18 @@
 package com.reservei.clientsapi.domain.record;
 
-public record ClientData(String name, String email, String cpf, String phone, String rg) {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
+
+public record ClientData(
+
+        @NotBlank
+        String name,
+        @NotBlank
+        @Email
+        String email,
+        @CPF
+        String cpf,
+        String phone,
+        String rg) {
 }

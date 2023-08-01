@@ -1,6 +1,7 @@
 package com.reservei.clientsapi.domain.model;
 
 import com.reservei.clientsapi.domain.record.ClientData;
+import com.reservei.clientsapi.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,9 +24,9 @@ public class Client extends Person {
         Client client = new Client();
         client.setName(data.name());
         client.setEmail(data.email());
-        client.setCpf(data.cpf());
-        client.setPhone(data.phone());
-        client.setRg(data.rg());
+        client.setCpf(StringUtils.removeDotsAndDashes(data.cpf()));
+        client.setPhone(StringUtils.removeDotsAndDashes(data.phone()));
+        client.setRg(StringUtils.removeDotsAndDashes(data.rg()));
         client.setRole("ROLE_USER");
         client.setCreatedAt(LocalDate.now());
 
@@ -35,9 +36,9 @@ public class Client extends Person {
     public static Client updateClient(Client client, ClientData data) {
         client.setName(data.name());
         client.setEmail(data.email());
-        client.setCpf(data.cpf());
-        client.setPhone(data.phone());
-        client.setRg(data.rg());
+        client.setCpf(StringUtils.removeDotsAndDashes(data.cpf()));
+        client.setPhone(StringUtils.removeDotsAndDashes(data.phone()));
+        client.setRg(StringUtils.removeDotsAndDashes(data.rg()));
         client.setUpdatedAt(LocalDate.now());
 
         return client;
