@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class ClientController {
 
     @PostMapping
     @Operation(summary = "Cria um novo cliente")
-    public ResponseEntity<ClientDto> create(@RequestBody ClientData data, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ClientDto> create(@RequestBody @Valid ClientData data, UriComponentsBuilder uriBuilder) {
         ClientDto dto = clientService.create(data);
         URI uri = uriBuilder.path("/clients/{id}").buildAndExpand(dto.getId()).toUri();
 
@@ -44,7 +45,7 @@ public class ClientController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza os dados de um cliente por id")
-    public ResponseEntity<ClientDto> updateById(@PathVariable Long id, @RequestBody ClientData data) {
+    public ResponseEntity<ClientDto> updateById(@PathVariable Long id, @RequestBody @Valid ClientData data) {
         ClientDto dto = clientService.updateById(id, data);
 
         return ResponseEntity.ok().body(dto);
