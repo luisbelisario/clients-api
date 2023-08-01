@@ -4,13 +4,15 @@ import com.reservei.clientsapi.domain.dto.ClientDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.model.Client;
 import com.reservei.clientsapi.domain.record.ClientData;
+import com.reservei.clientsapi.exception.EmailCadastradoException;
 import com.reservei.clientsapi.repository.ClientRepository;
+import com.reservei.clientsapi.service.validator.ClientValidatorImpl;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 public class ClientService {
@@ -18,9 +20,15 @@ public class ClientService {
     @Autowired
     ClientRepository clientRepository;
 
+    @Autowired
+    ClientValidatorImpl clientValidator;
 
-    public ClientDto create(ClientData data) {
+
+    public ClientDto create(ClientData data) throws EmailCadastradoException {
         Client client = Client.toClient(data);
+        if (clientValidator.emailExistsOnDatabase(client.getEmail())) {
+            throw new EmailCadastradoException("Email já cadastrado");
+        }
         Client clientSaved = clientRepository.save(client);
         return ClientDto.toDto(clientSaved);
     }

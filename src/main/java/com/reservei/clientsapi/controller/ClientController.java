@@ -3,6 +3,7 @@ package com.reservei.clientsapi.controller;
 import com.reservei.clientsapi.domain.dto.ClientDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.record.ClientData;
+import com.reservei.clientsapi.exception.EmailCadastradoException;
 import com.reservei.clientsapi.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,7 +29,7 @@ public class ClientController {
 
     @PostMapping
     @Operation(summary = "Cria um novo cliente")
-    public ResponseEntity<ClientDto> create(@RequestBody @Valid ClientData data, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ClientDto> create(@RequestBody @Valid ClientData data, UriComponentsBuilder uriBuilder) throws EmailCadastradoException {
         ClientDto dto = clientService.create(data);
         URI uri = uriBuilder.path("/clients/{id}").buildAndExpand(dto.getId()).toUri();
 
