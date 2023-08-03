@@ -1,9 +1,8 @@
 package com.reservei.clientsapi.service.clientvalidator;
 
 import com.reservei.clientsapi.domain.model.Client;
-import com.reservei.clientsapi.exception.CpfCadastradoException;
+import com.reservei.clientsapi.exception.CpfRegisteredException;
 import com.reservei.clientsapi.service.ClientService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,9 +15,9 @@ public class CpfValidator implements ClientValidator {
     }
 
     @Override
-    public void validate(Client client) throws CpfCadastradoException {
+    public void validate(Client client) throws CpfRegisteredException {
         if ((clientService.findByCpf(client.getCpf()) != null)){
-            throw new CpfCadastradoException("Cpf já cadastrado");
+            throw new CpfRegisteredException("Cpf já cadastrado");
         }
     }
 }
