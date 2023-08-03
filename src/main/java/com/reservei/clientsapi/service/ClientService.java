@@ -4,12 +4,11 @@ import com.reservei.clientsapi.domain.dto.ClientDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.model.Client;
 import com.reservei.clientsapi.domain.record.ClientData;
-import com.reservei.clientsapi.exception.EmailCadastradoException;
 import com.reservei.clientsapi.repository.ClientRepository;
-import com.reservei.clientsapi.service.validator.ClientValidatorImpl;
+import com.reservei.clientsapi.service.clientvalidator.CpfValidator;
+import com.reservei.clientsapi.service.clientvalidator.EmailValidator;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,17 +19,14 @@ public class ClientService {
     @Autowired
     ClientRepository clientRepository;
 
-    @Autowired
-    ClientValidatorImpl clientValidator;
+    private final CpfValidator cpfValidator = new CpfValidator(this);
+    private final EmailValidator emailValidator = new EmailValidator(this);
 
 
-    public ClientDto create(ClientData data) throws EmailCadastradoException {
+    public ClientDto create(ClientData data) throws Exception {
         Client client = Client.toClient(data);
-        if (clientValidator.emailExistsOnDatabase(client.getEmail())) {
-            throw new EmailCadastradoException("Email já cadastrado");
-        }
-        Client clientSaved = clientRepository.save(client);
-        return ClientDto.toDto(clientSaved);
+        validate(client);
+        return ClientDto.toDto(clientRepository.save(client));
     }
 
     public ClientDto findById(Long id) {
@@ -70,4 +66,18 @@ public class ClientService {
 
         return MessageDto.toDto("Cliente reativado com sucesso");
     }
+
+    private void validate(Client client) throws Exception {
+        emailValidator.validate(client);
+        cpfValidator.validate(client);
+    }
+
+    public Client findByEmail(String email) {
+        return clientRepository.findByEmail(email);
+    }
+
+    public Client findByCpf(String cpf) {
+        return clientRepository.findByCpf(cpf);
+    }
+
 }
