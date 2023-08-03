@@ -14,4 +14,9 @@ public class HandlerController {
     public ResponseEntity<ErrorMessageDto> emailIntegrityViolationHandler(EmailCadastradoException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrorMessageDto());
     }
+
+    @ExceptionHandler(CpfCadastradoException.class)
+    public ResponseEntity<ErrorMessageDto> cpfIntegrityViolationHandler(CpfCadastradoException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrorMessageDto());
+    }
 }

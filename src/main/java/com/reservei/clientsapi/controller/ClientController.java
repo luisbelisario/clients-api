@@ -29,7 +29,7 @@ public class ClientController {
 
     @PostMapping
     @Operation(summary = "Cria um novo cliente")
-    public ResponseEntity<ClientDto> create(@RequestBody @Valid ClientData data, UriComponentsBuilder uriBuilder) throws EmailCadastradoException {
+    public ResponseEntity<ClientDto> create(@RequestBody @Valid ClientData data, UriComponentsBuilder uriBuilder) throws Exception {
         ClientDto dto = clientService.create(data);
         URI uri = uriBuilder.path("/clients/{id}").buildAndExpand(dto.getId()).toUri();
 
