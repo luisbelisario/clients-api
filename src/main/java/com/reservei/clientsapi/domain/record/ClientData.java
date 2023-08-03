@@ -13,6 +13,5 @@ public record ClientData(
         String email,
         @CPF
         String cpf,
-        String phone,
-        String rg) {
+        String phone) {
 }

@@ -1,13 +1,11 @@
 package com.reservei.clientsapi.domain.dto;
 
 import com.reservei.clientsapi.domain.model.Client;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +27,6 @@ public class ClientDto {
         dto.setEmail(client.getEmail());
         dto.setCpf(client.getCpf());
         dto.setPhone(client.getPhone());
-        dto.setRg(client.getRg());
 
         return dto;
     }

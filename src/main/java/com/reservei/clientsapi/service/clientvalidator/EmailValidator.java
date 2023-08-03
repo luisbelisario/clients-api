@@ -1,7 +1,7 @@
 package com.reservei.clientsapi.service.clientvalidator;
 
 import com.reservei.clientsapi.domain.model.Client;
-import com.reservei.clientsapi.exception.EmailCadastradoException;
+import com.reservei.clientsapi.exception.EmailRegisteredException;
 import com.reservei.clientsapi.service.ClientService;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +15,9 @@ public class EmailValidator implements ClientValidator {
     }
 
     @Override
-    public void validate(Client client) throws EmailCadastradoException {
+    public void validate(Client client) throws EmailRegisteredException {
         if ((clientService.findByEmail(client.getEmail()) != null)) {
-            throw new EmailCadastradoException("Email já cadastrado");
+            throw new EmailRegisteredException("Email já cadastrado");
         }
     }
 }

@@ -18,7 +18,6 @@ public class Client extends Person {
 
     private String cpf;
     private String phone;
-    private String rg;
 
     public static Client toClient(ClientData data) {
         Client client = new Client();
@@ -26,7 +25,6 @@ public class Client extends Person {
         client.setEmail(data.email());
         client.setCpf(StringUtils.removeDotsAndDashes(data.cpf()));
         client.setPhone(StringUtils.removeDotsAndDashes(data.phone()));
-        client.setRg(StringUtils.removeDotsAndDashes(data.rg()));
         client.setRole("ROLE_USER");
         client.setCreatedAt(LocalDate.now());
 
@@ -38,7 +36,6 @@ public class Client extends Person {
         client.setEmail(data.email());
         client.setCpf(StringUtils.removeDotsAndDashes(data.cpf()));
         client.setPhone(StringUtils.removeDotsAndDashes(data.phone()));
-        client.setRg(StringUtils.removeDotsAndDashes(data.rg()));
         client.setUpdatedAt(LocalDate.now());
 
         return client;
