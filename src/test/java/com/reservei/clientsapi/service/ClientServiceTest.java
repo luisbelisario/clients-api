@@ -34,7 +34,7 @@ class ClientServiceTest {
         ClientData data = ClientDataMock.getClientDataMock();
         Client client = ClientMock.toClientMock(data);
 
-        when(clientRepository.save(Mockito.any())).thenReturn(client);
+        when(clientRepository.save(Mockito.any(Client.class))).thenReturn(client);
         ClientDto dtoSaved = clientService.create(data);
 
         Assertions.assertThat(dtoSaved).isNotNull();
@@ -46,9 +46,10 @@ class ClientServiceTest {
         ClientData data = ClientDataMock.getClientDataMock();
         Client client = ClientMock.toClientMock(data);
 
-        when(clientRepository.save(Mockito.any())).thenReturn(client);
+        when(clientRepository.save(Mockito.any(Client.class))).thenReturn(client);
         ClientDto dtoSaved = clientService.create(data);
 
         Assertions.assertThat(dtoSaved.getName()).isEqualTo(client.getName());
+        Assertions.assertThat(dtoSaved.getEmail()).isEqualTo(client.getEmail());
     }
 }
