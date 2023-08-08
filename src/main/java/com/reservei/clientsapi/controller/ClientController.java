@@ -3,7 +3,6 @@ package com.reservei.clientsapi.controller;
 import com.reservei.clientsapi.domain.dto.ClientDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.record.ClientData;
-import com.reservei.clientsapi.exception.InactiveAccountException;
 import com.reservei.clientsapi.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -10,7 +10,6 @@ import com.reservei.clientsapi.exception.InactiveAccountException;
 import com.reservei.clientsapi.repository.ClientRepository;
 import com.reservei.clientsapi.service.clientvalidator.CpfValidator;
 import com.reservei.clientsapi.service.clientvalidator.EmailValidator;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

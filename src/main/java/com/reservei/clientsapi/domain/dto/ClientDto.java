@@ -18,7 +18,6 @@ public class ClientDto {
     private String email;
     private String cpf;
     private String phone;
-    private String rg;
 
     public static ClientDto toDto(Client client) {
         ClientDto dto = new ClientDto();
