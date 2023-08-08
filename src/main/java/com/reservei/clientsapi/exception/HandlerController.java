@@ -21,7 +21,7 @@ public class HandlerController {
 
     @ExceptionHandler(ClientNotFoundException.class)
     public ResponseEntity<ErrorMessageDto> clienteNaoEncontradoHandler(ClientNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrorMessageDto());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getErrorMessageDto());
     }
 
     @ExceptionHandler(GenericException.class)
