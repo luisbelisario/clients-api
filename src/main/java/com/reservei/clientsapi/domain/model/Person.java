@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,6 +27,9 @@ public abstract class Person {
 
     @Column
     private String role;
+
+    @Column
+    private String public_id;
 
     @Column(name = "created_at")
     private LocalDate createdAt;
