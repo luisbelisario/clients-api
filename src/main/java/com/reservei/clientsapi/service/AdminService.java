@@ -34,7 +34,7 @@ public class AdminService {
 
     public AdminDto findById(Long id) throws Exception {
         Admin admin = adminRepository.findById(id)
-                .orElseThrow(() -> new ClientNotFoundException("Admin not found for the informed id"));
+                .orElseThrow(() -> new ClientNotFoundException("Admin não encontrado para o id informado"));
         if (admin.getDeletedAt() != null) {
             throw new InactiveAccountException("Admin with inactive account");
         }
@@ -43,24 +43,27 @@ public class AdminService {
 
     public AdminDto updateById(Long id, AdminData data) throws Exception {
         Admin admin = adminRepository.findById(id)
-                .orElseThrow(() -> new ClientNotFoundException("Client not found for the informed id"));
+                .orElseThrow(() -> new ClientNotFoundException("Admin não encontrado para o id informado"));
         if (admin.getDeletedAt() != null) {
-            throw new InactiveAccountException("Client with inactive account");
+            throw new InactiveAccountException("Admin com a conta inativa");
         }
         Admin updatedAdmin = Admin.updateClient(admin, data);
         adminRepository.save(updatedAdmin);
         return AdminDto.toDto(updatedAdmin);
     }
+
     public MessageDto performActionOnAdmin(Long id, Consumer<Admin> action, String type, String errorMessage) throws Exception {
         Admin admin = adminRepository.findById(id)
-                .orElseThrow(() -> new ClientNotFoundException("Admin not found for the informed id"));
+                .orElseThrow(() -> new ClientNotFoundException("Admin não encontrado para o id informado"));
 
         if (action == null) {
-            throw new IllegalArgumentException("Action is required");
+            throw new IllegalArgumentException("Action é necessária");
         }
 
         if (admin.getDeletedAt() == null && type.equals("Activated")) {
-            throw new GenericException("This admin is already active");
+            throw new GenericException("Admin já está com a conta ativada");
+        } else if (admin.getDeletedAt() != null && type.equals("Disabled")) {
+            throw new GenericException("Admin já está com a conta desativada");
         }
         action.accept(admin);
         adminRepository.save(admin);
@@ -68,11 +71,11 @@ public class AdminService {
     }
 
     public MessageDto reactivateById(Long id) throws Exception {
-        return performActionOnAdmin(id, admin -> admin.setDeletedAt(null), "Activated","reactivated successfully");
+        return performActionOnAdmin(id, admin -> admin.setDeletedAt(null), "Activated", "reativado com sucesso");
     }
 
     public MessageDto deleteById(Long id) throws Exception {
-        return performActionOnAdmin(id, admin -> admin.setDeletedAt(LocalDate.now()),"Disabled", "deleted successfully");
+        return performActionOnAdmin(id, admin -> admin.setDeletedAt(LocalDate.now()), "Disabled", "desativado com sucesso");
     }
 
     public Admin findByEmail(String email) {

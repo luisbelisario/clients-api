@@ -1,10 +1,7 @@
 package com.reservei.clientsapi.controller;
-
 import com.reservei.clientsapi.domain.dto.AdminDto;
-import com.reservei.clientsapi.domain.dto.ClientDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.record.AdminData;
-import com.reservei.clientsapi.domain.record.ClientData;
 import com.reservei.clientsapi.exception.CpfRegisteredException;
 import com.reservei.clientsapi.service.AdminService;
 import com.reservei.clientsapi.util.CpfValidator;
@@ -12,8 +9,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -37,7 +32,7 @@ public class AdminController {
     })
     public ResponseEntity<AdminDto> create(@RequestBody @Valid AdminData data, UriComponentsBuilder uriBuilder) throws Exception {
         if (!CpfValidator.isValidCpfCnpj(data.getCpfCnpj())) {
-            throw new CpfRegisteredException("Invalid CPF/CNPJ");
+            throw new CpfRegisteredException("CPF/CNPJ Inválido");
         }
 
         AdminDto dto = adminService.create(data);
