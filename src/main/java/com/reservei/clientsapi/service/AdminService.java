@@ -36,7 +36,7 @@ public class AdminService {
         Admin admin = adminRepository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException("Admin não encontrado para o id informado"));
         if (admin.getDeletedAt() != null) {
-            throw new InactiveAccountException("Admin with inactive account");
+            throw new InactiveAccountException("Admin com a conta inativa");
         }
         return AdminDto.toDto(admin);
     }
@@ -79,10 +79,5 @@ public class AdminService {
     public MessageDto deleteById(Long id) throws Exception {
         return performActionOnAdmin(id, admin -> admin.setDeletedAt(LocalDate.now()), "Disabled", "desativado com sucesso");
     }
-
-    public Admin findByEmail(String email) {
-        return adminRepository.findByEmail(email);
-    }
-
 
 }

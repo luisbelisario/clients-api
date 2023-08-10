@@ -1,8 +1,8 @@
-package com.reservei.clientsapi.util;
+package com.reservei.clientsapi.service.adminValidator;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-public class CpfValidator {
+public class CpfCnpjValidator {
     private static final String CPF_CNPJ_REGEX = "^(\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2})$|^(\\d{2}\\.\\d{3}\\.\\d{3}\\/\\d{4}\\-\\d{2})$";
     private static final Pattern pattern = Pattern.compile(CPF_CNPJ_REGEX);
     private static final int[] firstBaseCnpjNumbersMultipliers = {5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
