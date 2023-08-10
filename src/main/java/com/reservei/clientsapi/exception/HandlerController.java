@@ -21,11 +21,21 @@ public class HandlerController {
 
     @ExceptionHandler(ClientNotFoundException.class)
     public ResponseEntity<ErrorMessageDto> clienteNaoEncontradoHandler(ClientNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrorMessageDto());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getErrorMessageDto());
     }
 
     @ExceptionHandler(GenericException.class)
     public ResponseEntity<ErrorMessageDto> genericHandler(GenericException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrorMessageDto());
+    }
+
+    @ExceptionHandler(InactiveAccountException.class)
+    public ResponseEntity<ErrorMessageDto> inactiveAccountExceptionHandler(InactiveAccountException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrorMessageDto());
+    }
+
+    @ExceptionHandler(ApiCommunicationException.class)
+    public ResponseEntity<ErrorMessageDto> inactiveAccountExceptionHandler(ApiCommunicationException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getErrorMessageDto());
     }
 }
