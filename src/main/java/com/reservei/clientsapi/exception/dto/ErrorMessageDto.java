@@ -1,6 +1,5 @@
 package com.reservei.clientsapi.exception.dto;
 
-import com.reservei.clientsapi.domain.dto.MessageDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,6 +22,7 @@ public class Client extends Person {
 
     public static Client toClient(ClientData data) {
         Client client = new Client();
+        client.setPublic_id(UUID.randomUUID().toString());
         client.setName(data.name());
         client.setEmail(data.email());
         client.setCpf(StringUtils.removeDotsAndDashes(data.cpf()));

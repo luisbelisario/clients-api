@@ -11,6 +11,8 @@ public record ClientData(
         @NotBlank
         @Email
         String email,
+        @NotBlank
+        String password,
         @CPF
         String cpf,
         String phone) {
