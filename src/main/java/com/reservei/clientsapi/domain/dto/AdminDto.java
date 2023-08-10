@@ -16,8 +16,6 @@ public class AdminDto {
     private String name;
     private String email;
     private String cpf;
-    private String phone;
-    private String rg;
 
     public static AdminDto toDto(Admin admin) {
         AdminDto dto = new AdminDto();

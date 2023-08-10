@@ -28,4 +28,12 @@ public class Admin extends Person {
 
         return admin;
     }
+
+    public static Admin updateClient(Admin admin, AdminData data) {
+        admin.setName(data.name());
+        admin.setEmail(data.email());
+        admin.setCpfCnpj(StringUtils.removeDotsAndDashes(data.cpfCnpj()));
+        admin.setUpdatedAt(LocalDate.now());
+        return admin;
+    }
 }
