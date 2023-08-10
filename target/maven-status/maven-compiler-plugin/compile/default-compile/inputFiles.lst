@@ -1,10 +1,11 @@
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/UserData.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/ClientsApiApplication.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/config/openapi/OpenApiConfig.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/dto/ErrorMessageDto.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/AdminData.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/controller/ClientController.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/EmailValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/AdminRepository.java
-/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/config/OpenApiConfig.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/ClientData.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/ClientNotFoundException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/EmailRegisteredException.java
@@ -15,6 +16,7 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/util/StringUtils.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/ClientService.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/CpfValidator.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/ApiCommunicationException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/InactiveAccountException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/GenericException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/HandlerController.java
@@ -22,5 +24,6 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Client.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Admin.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Person.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/config/feign/UserClient.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/AdminService.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/dto/MessageDto.java

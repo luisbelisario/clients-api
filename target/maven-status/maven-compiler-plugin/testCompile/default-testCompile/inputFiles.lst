@@ -1,1 +1,4 @@
-/Users/luissantos/Projetos/clients-api/src/test/java/com/reservei/clientsapi/ClientsApiApplicationTests.java
+/Users/luissantos/Projetos/clients-api/src/test/java/mocks/ClientDataMock.java
+/Users/luissantos/Projetos/clients-api/src/test/java/mocks/ClientDtoMock.java
+/Users/luissantos/Projetos/clients-api/src/test/java/mocks/ClientMock.java
+/Users/luissantos/Projetos/clients-api/src/test/java/com/reservei/clientsapi/service/ClientServiceTest.java
