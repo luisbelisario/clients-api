@@ -60,11 +60,13 @@ public class AdminService {
             throw new IllegalArgumentException("Action é necessária");
         }
 
-        if (admin.getDeletedAt() == null && type.equals("Activated")) {
-            throw new GenericException("Admin já está com a conta ativada");
-        } else if (admin.getDeletedAt() != null && type.equals("Disabled")) {
-            throw new GenericException("Admin já está com a conta desativada");
+        String accountStatus = (admin.getDeletedAt() == null) ? "ativada" : "desativada";
+
+        if ((admin.getDeletedAt() == null && type.equals("Activated")) ||
+                (admin.getDeletedAt() != null && type.equals("Disabled"))) {
+            throw new GenericException("Admin já está com a conta " + accountStatus);
         }
+
         action.accept(admin);
         adminRepository.save(admin);
         return MessageDto.toDto("Admin " + errorMessage);
