@@ -5,7 +5,9 @@ import com.reservei.clientsapi.domain.dto.ClientDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.record.AdminData;
 import com.reservei.clientsapi.domain.record.ClientData;
+import com.reservei.clientsapi.exception.CpfRegisteredException;
 import com.reservei.clientsapi.service.AdminService;
+import com.reservei.clientsapi.util.CpfValidator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -34,6 +36,10 @@ public class AdminController {
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     public ResponseEntity<AdminDto> create(@RequestBody @Valid AdminData data, UriComponentsBuilder uriBuilder) throws Exception {
+        if (!CpfValidator.isValidCpfCnpj(data.getCpfCnpj())) {
+            throw new CpfRegisteredException("Invalid CPF/CNPJ");
+        }
+
         AdminDto dto = adminService.create(data);
         URI uri = uriBuilder.path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);

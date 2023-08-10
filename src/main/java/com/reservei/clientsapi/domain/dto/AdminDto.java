@@ -15,14 +15,14 @@ public class AdminDto {
     private Long id;
     private String name;
     private String email;
-    private String cpf;
+    private String cpfCnpj;
 
     public static AdminDto toDto(Admin admin) {
         AdminDto dto = new AdminDto();
         dto.setId(admin.getId());
         dto.setName(admin.getName());
         dto.setEmail(admin.getEmail());
-        dto.setCpf(admin.getCpfCnpj());
+        dto.setCpfCnpj(admin.getCpfCnpj());
         return dto;
     }
 }
