@@ -46,7 +46,7 @@ public class ClientController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping("/{publicId}")
+    @GetMapping("/publicId/{publicId}")
     @Operation(summary = "Busca um cliente por publicId", responses = {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
