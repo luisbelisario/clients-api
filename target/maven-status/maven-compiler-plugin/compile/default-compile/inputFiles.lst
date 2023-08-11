@@ -1,5 +1,8 @@
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/controller/AdminController.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/dto/AdminDto.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/UserData.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/ClientsApiApplication.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/PublicIdValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/config/openapi/OpenApiConfig.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/dto/ErrorMessageDto.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/AdminData.java
@@ -12,8 +15,10 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/ClientValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/ClientRepository.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/PersonRepository.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/config/security/WebConfiguration.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/CpfRegisteredException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/util/StringUtils.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/adminValidator/CpfCnpjValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/ClientService.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/CpfValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/ApiCommunicationException.java
@@ -25,5 +30,6 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Admin.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Person.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/config/feign/UserClient.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/PublicIdRegisteredException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/AdminService.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/dto/MessageDto.java
