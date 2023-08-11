@@ -46,35 +46,46 @@ public class ClientController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @PutMapping("/{id}")
+    @GetMapping("/{publicId}")
+    @Operation(summary = "Busca um cliente por publicId", responses = {
+            @ApiResponse(responseCode = "200", description = "Ok"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
+    })
+    public ResponseEntity<ClientDto> findByPublicId(@PathVariable String publicId) throws Exception {
+        ClientDto dto = clientService.findByPublicId(publicId);
+
+        return ResponseEntity.ok().body(dto);
+    }
+
+    @PutMapping("/{publicId}")
     @Operation(summary = "Atualiza os dados de um cliente por id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<ClientDto> updateById(@PathVariable Long id, @RequestBody @Valid ClientData data) throws Exception {
-        ClientDto dto = clientService.updateById(id, data);
+    public ResponseEntity<ClientDto> updateById(@PathVariable String publicId, @RequestBody @Valid ClientData data) throws Exception {
+        ClientDto dto = clientService.updateByPublicId(publicId, data);
 
         return ResponseEntity.ok().body(dto);
     }
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/{publicId}")
     @Operation(summary = "Reativa a conta de um cliente por id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<MessageDto> reactivateById(@PathVariable Long id) throws Exception {
-        MessageDto dto = clientService.reactivateById(id);
+    public ResponseEntity<MessageDto> reactivateById(@PathVariable String publicId) throws Exception {
+        MessageDto dto = clientService.reactivateById(publicId);
 
         return ResponseEntity.ok().body(dto);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{publicId}")
     @Operation(summary = "Deleta um cliente por id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<MessageDto> deleteById(@PathVariable Long id) throws Exception {
-        MessageDto dto = clientService.deleteById(id);
+    public ResponseEntity<MessageDto> deleteById(@PathVariable String publicId) throws Exception {
+        MessageDto dto = clientService.deleteById(publicId);
 
         return ResponseEntity.ok().body(dto);
     }

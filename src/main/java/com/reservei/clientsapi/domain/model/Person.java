@@ -28,8 +28,8 @@ public abstract class Person {
     @Column
     private String role;
 
-    @Column
-    private String public_id;
+    @Column(name = "public_id")
+    private String publicId;
 
     @Column(name = "created_at")
     private LocalDate createdAt;
