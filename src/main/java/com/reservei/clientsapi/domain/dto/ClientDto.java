@@ -14,6 +14,7 @@ import lombok.Setter;
 public class ClientDto {
 
     private Long id;
+    private String publicId;
     private String name;
     private String email;
     private String cpf;
@@ -22,6 +23,7 @@ public class ClientDto {
     public static ClientDto toDto(Client client) {
         ClientDto dto = new ClientDto();
         dto.setId(client.getId());
+        dto.setPublicId(client.getPublicId());
         dto.setName(client.getName());
         dto.setEmail(client.getEmail());
         dto.setCpf(client.getCpf());
