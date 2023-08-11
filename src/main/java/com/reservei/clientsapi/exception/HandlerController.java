@@ -19,6 +19,11 @@ public class HandlerController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrorMessageDto());
     }
 
+    @ExceptionHandler(PublicIdRegisteredException.class)
+    public ResponseEntity<ErrorMessageDto> cpfIntegrityViolationHandler(PublicIdRegisteredException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getErrorMessageDto());
+    }
+
     @ExceptionHandler(ClientNotFoundException.class)
     public ResponseEntity<ErrorMessageDto> clienteNaoEncontradoHandler(ClientNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getErrorMessageDto());
