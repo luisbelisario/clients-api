@@ -22,6 +22,7 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/ClientService.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/CpfValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/ApiCommunicationException.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/EmailData.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/InactiveAccountException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/GenericException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/HandlerController.java
