@@ -1,7 +1,10 @@
 package com.reservei.clientsapi.controller;
 import com.reservei.clientsapi.domain.dto.AdminDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
+import com.reservei.clientsapi.domain.model.Admin;
+import com.reservei.clientsapi.domain.model.Client;
 import com.reservei.clientsapi.domain.record.AdminData;
+import com.reservei.clientsapi.domain.record.EmailData;
 import com.reservei.clientsapi.exception.CpfRegisteredException;
 import com.reservei.clientsapi.service.AdminService;
 import com.reservei.clientsapi.service.adminValidator.CpfCnpjValidator;
@@ -50,6 +53,21 @@ public class AdminController {
         AdminDto dto = adminService.findById(id);
         return ResponseEntity.ok().body(dto);
     }
+
+    @GetMapping("/email")
+    @Operation(summary = "Busca um cliente por email", responses = {
+            @ApiResponse(responseCode = "200", description = "Ok"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
+    })
+    public ResponseEntity<Boolean> findByEmail(@RequestBody EmailData data) throws Exception {
+        Admin admin = adminService.findByEmail(data.email());
+        if(admin != null) {
+            return ResponseEntity.ok().body(true);
+        }
+        return ResponseEntity.ok().body(false);
+    }
+
+
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza os dados de um admin por id", responses = {
             @ApiResponse(responseCode = "200", description = "OK"),
