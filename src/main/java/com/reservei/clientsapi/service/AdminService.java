@@ -80,4 +80,7 @@ public class AdminService {
         return performActionOnAdmin(id, admin -> admin.setDeletedAt(LocalDate.now()), "Disabled", "desativado com sucesso");
     }
 
+    public Admin findByEmail(String email) {
+        return adminRepository.findByEmail(email);
+    }
 }

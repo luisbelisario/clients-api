@@ -27,7 +27,7 @@ public class Client extends Person {
         client.setEmail(data.email());
         client.setCpf(StringUtils.removeDotsAndDashes(data.cpf()));
         client.setPhone(StringUtils.removeDotsAndDashes(data.phone()));
-        client.setRole("ROLE_USER");
+        client.setRole("USER");
         client.setCreatedAt(LocalDate.now());
 
         return client;

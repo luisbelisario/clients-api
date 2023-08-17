@@ -2,7 +2,9 @@ package com.reservei.clientsapi.controller;
 
 import com.reservei.clientsapi.domain.dto.ClientDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
+import com.reservei.clientsapi.domain.model.Client;
 import com.reservei.clientsapi.domain.record.ClientData;
+import com.reservei.clientsapi.domain.record.EmailData;
 import com.reservei.clientsapi.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -56,6 +58,19 @@ public class ClientController {
         ClientDto dto = clientService.findByPublicId(publicId);
 
         return ResponseEntity.ok().body(dto);
+    }
+
+    @GetMapping("/email")
+    @Operation(summary = "Busca um cliente por email", responses = {
+            @ApiResponse(responseCode = "200", description = "Ok"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
+    })
+    public ResponseEntity<Boolean> findByEmail(@RequestBody EmailData data) throws Exception {
+        Client client = clientService.findByEmail(data.email());
+        if(client != null) {
+            return ResponseEntity.ok().body(true);
+        }
+        return ResponseEntity.ok().body(false);
     }
 
     @PutMapping("/{publicId}")
