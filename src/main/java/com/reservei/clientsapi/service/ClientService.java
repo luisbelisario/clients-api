@@ -16,6 +16,7 @@ import com.reservei.clientsapi.service.clientvalidator.EmailValidator;
 import com.reservei.clientsapi.service.clientvalidator.PublicIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -39,7 +40,7 @@ public class ClientService {
     public ClientDto create(ClientData data) throws Exception {
         Client client = Client.toClient(data);
         validate(client);
-        String password = BCrypt.hashpw(data.password(), BCrypt.gensalt(12));
+        String password = new BCryptPasswordEncoder().encode(data.password());
         UserData dataUser = new UserData(client.getPublicId(),
                 client.getEmail(), password, client.getRole());
         try {

@@ -1,7 +1,6 @@
 package com.reservei.clientsapi.domain.model;
 
 import com.reservei.clientsapi.domain.record.AdminData;
-import com.reservei.clientsapi.domain.record.ClientData;
 import com.reservei.clientsapi.util.StringUtils;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,7 +22,7 @@ public class Admin extends Person {
         admin.setName(data.name());
         admin.setEmail(data.email());
         admin.setCpfCnpj(StringUtils.removeDotsAndDashes(data.cpfCnpj()));
-        admin.setRole("ROLE_ADMIN");
+        admin.setRole("ADMIN");
         admin.setCreatedAt(LocalDate.now());
 
         return admin;
