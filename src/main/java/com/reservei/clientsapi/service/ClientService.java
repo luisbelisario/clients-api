@@ -81,7 +81,7 @@ public class ClientService {
         try {
             UserData dataUser = new UserData(updatedClient.getPublicId(),
                     updatedClient.getEmail(), password, updatedClient.getRole());
-            userClient.updateUser(updatedClient.getPublicId(), dataUser);
+            userClient.updateUser(updatedClient.getPublicId(), dataUser, token);
         } catch (Exception ex) {
             throw new ApiCommunicationException("Falha na comunicação com o serviço de usuários");
         }
