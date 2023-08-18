@@ -59,7 +59,7 @@ public class AdminController {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<Boolean> findByEmail(@RequestBody EmailData data) throws Exception {
+    public ResponseEntity<Boolean> findByEmail(@RequestBody EmailData data) {
         Admin admin = adminService.findByEmail(data.email());
         if(admin != null) {
             return ResponseEntity.ok().body(true);

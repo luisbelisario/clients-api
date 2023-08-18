@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,8 +18,9 @@ import java.time.LocalDate;
 public class Admin extends Person {
 
     private String cpfCnpj;
-    public static Admin toClient(AdminData data) {
+    public static Admin toAdmin(AdminData data) {
         Admin admin = new Admin();
+        admin.setPublicId(UUID.randomUUID().toString());
         admin.setName(data.name());
         admin.setEmail(data.email());
         admin.setCpfCnpj(StringUtils.removeDotsAndDashes(data.cpfCnpj()));
@@ -28,7 +30,7 @@ public class Admin extends Person {
         return admin;
     }
 
-    public static Admin updateClient(Admin admin, AdminData data) {
+    public static Admin updateAdmin(Admin admin, AdminData data) {
         admin.setName(data.name());
         admin.setEmail(data.email());
         admin.setCpfCnpj(StringUtils.removeDotsAndDashes(data.cpfCnpj()));

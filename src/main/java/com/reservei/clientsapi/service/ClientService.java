@@ -40,7 +40,7 @@ public class ClientService {
     public ClientDto create(ClientData data) throws Exception {
         Client client = Client.toClient(data);
         validate(client);
-        String password = new BCryptPasswordEncoder().encode(data.password());
+        String password = generatePassword(data.password());
         UserData dataUser = new UserData(client.getPublicId(),
                 client.getEmail(), password, client.getRole());
         try {
@@ -78,7 +78,7 @@ public class ClientService {
         }
         Client updatedClient = Client.updateClient(client, data);
         validate(updatedClient);
-        String password = BCrypt.hashpw(data.password(), BCrypt.gensalt(12));
+        String password = generatePassword(data.password());
         try {
             UserData dataUser = new UserData(updatedClient.getPublicId(),
                     updatedClient.getEmail(), password, updatedClient.getRole());
@@ -142,5 +142,9 @@ public class ClientService {
 
     public Optional<Client> findByPublicIdValidation(String publicId) {
         return clientRepository.findByPublicId(publicId);
+    }
+
+    private static String generatePassword(String password) {
+        return new BCryptPasswordEncoder().encode(password);
     }
 }
