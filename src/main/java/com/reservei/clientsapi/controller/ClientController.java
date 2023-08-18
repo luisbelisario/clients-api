@@ -74,34 +74,34 @@ public class ClientController {
     }
 
     @PutMapping("/{publicId}")
-    @Operation(summary = "Atualiza os dados de um cliente por id", responses = {
+    @Operation(summary = "Atualiza os dados de um cliente por public id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<ClientDto> updateById(@PathVariable String publicId, @RequestBody @Valid ClientData data) throws Exception {
-        ClientDto dto = clientService.updateByPublicId(publicId, data);
+    public ResponseEntity<ClientDto> updateById(@PathVariable String publicId, @RequestBody @Valid ClientData data, @RequestHeader("Authorization") String token) throws Exception {
+        ClientDto dto = clientService.updateByPublicId(publicId, data, token);
 
         return ResponseEntity.ok().body(dto);
     }
 
     @PatchMapping("/{publicId}")
-    @Operation(summary = "Reativa a conta de um cliente por id", responses = {
+    @Operation(summary = "Reativa a conta de um cliente por public id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<MessageDto> reactivateById(@PathVariable String publicId) throws Exception {
-        MessageDto dto = clientService.reactivateById(publicId);
+    public ResponseEntity<MessageDto> reactivateById(@PathVariable String publicId, @RequestHeader("Authorization") String token) throws Exception {
+        MessageDto dto = clientService.reactivateById(publicId, token);
 
         return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping("/{publicId}")
-    @Operation(summary = "Deleta um cliente por id", responses = {
+    @Operation(summary = "Deleta um cliente por public id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<MessageDto> deleteById(@PathVariable String publicId) throws Exception {
-        MessageDto dto = clientService.deleteById(publicId);
+    public ResponseEntity<MessageDto> deleteById(@PathVariable String publicId, @RequestHeader("Authorization") String token) throws Exception {
+        MessageDto dto = clientService.deleteById(publicId, token);
 
         return ResponseEntity.ok().body(dto);
     }

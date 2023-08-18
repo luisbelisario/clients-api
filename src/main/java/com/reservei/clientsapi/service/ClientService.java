@@ -15,7 +15,6 @@ import com.reservei.clientsapi.service.clientvalidator.CpfValidator;
 import com.reservei.clientsapi.service.clientvalidator.EmailValidator;
 import com.reservei.clientsapi.service.clientvalidator.PublicIdValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -70,7 +69,7 @@ public class ClientService {
         return ClientDto.toDto(client);
     }
 
-    public ClientDto updateByPublicId(String publicId, ClientData data) throws Exception {
+    public ClientDto updateByPublicId(String publicId, ClientData data, String token) throws Exception {
         Client client = clientRepository.findByPublicId(publicId)
                 .orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado para o public id informado"));
         if (client.getDeletedAt() != null) {
@@ -90,7 +89,7 @@ public class ClientService {
         return ClientDto.toDto(updatedClient);
     }
 
-    public MessageDto reactivateById(String publicId) throws Exception {
+    public MessageDto reactivateById(String publicId, String token) throws Exception {
         Client client = clientRepository.findByPublicId(publicId)
                 .orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado para o id informado"));
         if(client.getDeletedAt() == null) {
@@ -98,7 +97,7 @@ public class ClientService {
         }
         client.setDeletedAt(null);
         try{
-            userClient.reactivateUser(client.getPublicId());
+            userClient.reactivateUser(client.getPublicId(), token);
         } catch (Exception ex) {
             throw new ApiCommunicationException("Falha na comunicação com o serviço de usuários");
         }
@@ -108,7 +107,7 @@ public class ClientService {
         return MessageDto.toDto("Cliente reativado com sucesso");
     }
 
-    public MessageDto deleteById(String publicId) throws Exception {
+    public MessageDto deleteById(String publicId, String token) throws Exception {
         Client client = clientRepository.findByPublicId(publicId)
                 .orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado para o id informado"));
         if(client.getDeletedAt() != null) {
@@ -116,7 +115,7 @@ public class ClientService {
         }
         client.setDeletedAt(LocalDate.now());
         try {
-            userClient.deleteUser(client.getPublicId());
+            userClient.deleteUser(client.getPublicId(), token);
         } catch (Exception ex) {
             throw new ApiCommunicationException("Falha na comunicação com o serviço de usuários");
         }

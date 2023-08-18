@@ -73,16 +73,17 @@ public class AdminController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<AdminDto> updateById(@PathVariable Long id, @RequestBody @Valid AdminData data) throws Exception {
+    public ResponseEntity<AdminDto> updateById(@PathVariable Long id, @RequestBody @Valid AdminData data, @RequestHeader("Authorization") String token) throws Exception {
         AdminDto dto = adminService.updateById(id, data);
         return ResponseEntity.ok().body(dto);
     }
+
     @PatchMapping("/{id}")
     @Operation(summary = "Reativa a conta de um admin por id", responses = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<MessageDto> reactivateById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<MessageDto> reactivateById(@PathVariable Long id, @RequestHeader("Authorization") String token) throws Exception {
         MessageDto dto = adminService.reactivateById(id);
         return ResponseEntity.ok().body(dto);
     }
@@ -92,7 +93,7 @@ public class AdminController {
             @ApiResponse(responseCode = "204", description = "No Content"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<MessageDto> deleteById(@PathVariable Long id) throws Exception {
+    public ResponseEntity<MessageDto> deleteById(@PathVariable Long id, @RequestHeader("Authorization") String token) throws Exception {
         MessageDto dto = adminService.deleteById(id);
         return ResponseEntity.ok().body(dto);
     }
