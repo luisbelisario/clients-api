@@ -5,11 +5,13 @@ import com.reservei.clientsapi.domain.dto.ClientDto;
 import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.model.Client;
 import com.reservei.clientsapi.domain.record.ClientData;
+import com.reservei.clientsapi.domain.record.TokenData;
 import com.reservei.clientsapi.domain.record.UserData;
 import com.reservei.clientsapi.exception.ApiCommunicationException;
 import com.reservei.clientsapi.exception.ClientNotFoundException;
 import com.reservei.clientsapi.exception.GenericException;
 import com.reservei.clientsapi.exception.InactiveAccountException;
+import com.reservei.clientsapi.exception.InvalidTokenException;
 import com.reservei.clientsapi.repository.ClientRepository;
 import com.reservei.clientsapi.service.clientvalidator.CpfValidator;
 import com.reservei.clientsapi.service.clientvalidator.EmailValidator;
@@ -38,7 +40,7 @@ public class ClientService {
 
     public ClientDto create(ClientData data) throws Exception {
         Client client = Client.toClient(data);
-        validate(client);
+        validateCreate(client);
         String password = generatePassword(data.password());
         UserData dataUser = new UserData(client.getPublicId(),
                 client.getEmail(), password, client.getRole());
@@ -51,9 +53,20 @@ public class ClientService {
         return ClientDto.toDto(clientRepository.save(client));
     }
 
-    public ClientDto findById(Long id) throws Exception {
+    public ClientDto findById(Long id, String token) throws Exception {
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado para o id informado"));
+        validateToken(token, client);
+        if (client.getDeletedAt() != null) {
+            throw new InactiveAccountException("Cliente com a conta inativa");
+        }
+        return ClientDto.toDto(client);
+    }
+
+    public ClientDto findByPublicId(String publicId, String token) throws Exception {
+        Client client = clientRepository.findByPublicId(publicId)
+                .orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado para o public id informado"));
+        validateToken(token, client);
         if (client.getDeletedAt() != null) {
             throw new InactiveAccountException("Cliente com a conta inativa");
         }
@@ -72,11 +85,12 @@ public class ClientService {
     public ClientDto updateByPublicId(String publicId, ClientData data, String token) throws Exception {
         Client client = clientRepository.findByPublicId(publicId)
                 .orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado para o public id informado"));
+        validateToken(token, client);
         if (client.getDeletedAt() != null) {
             throw new InactiveAccountException("Cliente com a conta inativa");
         }
         Client updatedClient = Client.updateClient(client, data);
-        validate(updatedClient);
+        validateUpdate(updatedClient, client);
         String password = generatePassword(data.password());
         try {
             UserData dataUser = new UserData(updatedClient.getPublicId(),
@@ -92,6 +106,7 @@ public class ClientService {
     public MessageDto reactivateById(String publicId, String token) throws Exception {
         Client client = clientRepository.findByPublicId(publicId)
                 .orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado para o id informado"));
+        validateToken(token, client);
         if(client.getDeletedAt() == null) {
             throw new GenericException("Cliente já está com a conta ativa");
         }
@@ -110,6 +125,7 @@ public class ClientService {
     public MessageDto deleteById(String publicId, String token) throws Exception {
         Client client = clientRepository.findByPublicId(publicId)
                 .orElseThrow(() -> new ClientNotFoundException("Cliente não encontrado para o id informado"));
+        validateToken(token, client);
         if(client.getDeletedAt() != null) {
             throw new GenericException("Cliente já está com a conta inativa");
         }
@@ -125,10 +141,16 @@ public class ClientService {
         return MessageDto.toDto("Cliente excluído com sucesso");
     }
 
-    private void validate(Client client) throws Exception {
+    private void validateCreate(Client client) throws Exception {
         emailValidator.validate(client);
         cpfValidator.validate(client);
         publicIdValidator.validate(client);
+    }
+
+    private void validateUpdate(Client updatedClient, Client client) throws Exception {
+        emailValidator.validateUpdate(client, updatedClient);
+        cpfValidator.validateUpdate(client, updatedClient);
+        publicIdValidator.validateUpdate(client, updatedClient);
     }
 
     public Client findByEmail(String email) {
@@ -145,5 +167,16 @@ public class ClientService {
 
     private static String generatePassword(String password) {
         return new BCryptPasswordEncoder().encode(password);
+    }
+
+    public String getUsername(TokenData data) {
+        return userClient.validateToken(data);
+    }
+
+    private void validateToken(String token, Client client) throws InvalidTokenException {
+        if( (userClient.validateToken(TokenData.toData(token)).equals("invalid")) ||
+                !(userClient.validateToken(TokenData.toData(token)).equals(client.getEmail()))) {
+            throw new InvalidTokenException("Token inválido ou expirado");
+        }
     }
 }
