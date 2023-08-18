@@ -15,10 +15,10 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/ClientValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/ClientRepository.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/PersonRepository.java
-/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/config/security/WebConfiguration.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/CpfRegisteredException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/util/StringUtils.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/adminValidator/CpfCnpjValidator.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/record/TokenData.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/ClientService.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/CpfValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/ApiCommunicationException.java
@@ -28,6 +28,7 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/HandlerController.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/dto/ClientDto.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Client.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/InvalidTokenException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Admin.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/domain/model/Person.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/config/feign/UserClient.java
