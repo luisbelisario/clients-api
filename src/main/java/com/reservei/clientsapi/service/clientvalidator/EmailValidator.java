@@ -16,7 +16,15 @@ public class EmailValidator implements ClientValidator {
 
     @Override
     public void validate(Client client) throws EmailRegisteredException {
-        if ((clientService.findByEmail(client.getEmail()) != null)) {
+        if (clientService.findByEmail(client.getEmail()) != null) {
+            throw new EmailRegisteredException("Email já cadastrado");
+        }
+    }
+
+    @Override
+    public void validateUpdate(Client client, Client updatedClient) throws Exception {
+        if (!(client.getEmail().equals(updatedClient.getEmail())) &&
+                (clientService.findByEmail(client.getEmail()) != null)) {
             throw new EmailRegisteredException("Email já cadastrado");
         }
     }

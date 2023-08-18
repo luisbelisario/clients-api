@@ -5,6 +5,8 @@ import com.reservei.clientsapi.domain.dto.MessageDto;
 import com.reservei.clientsapi.domain.model.Client;
 import com.reservei.clientsapi.domain.record.ClientData;
 import com.reservei.clientsapi.domain.record.EmailData;
+import com.reservei.clientsapi.domain.record.TokenData;
+import com.reservei.clientsapi.exception.InvalidTokenException;
 import com.reservei.clientsapi.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -43,8 +45,9 @@ public class ClientController {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<ClientDto> findById(@PathVariable Long id) throws Exception {
-        ClientDto dto = clientService.findById(id);
+    public ResponseEntity<ClientDto> findById(@PathVariable Long id,
+                                              @RequestHeader("Authorization") String token) throws Exception {
+        ClientDto dto = clientService.findById(id, token);
 
         return ResponseEntity.ok().body(dto);
     }
@@ -54,8 +57,9 @@ public class ClientController {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<ClientDto> findByPublicId(@PathVariable String publicId) throws Exception {
-        ClientDto dto = clientService.findByPublicId(publicId);
+    public ResponseEntity<ClientDto> findByPublicId(@PathVariable String publicId,
+                                                    @RequestHeader("Authorization") String token) throws Exception {
+        ClientDto dto = clientService.findByPublicId(publicId, token);
 
         return ResponseEntity.ok().body(dto);
     }
@@ -65,7 +69,7 @@ public class ClientController {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<Boolean> findByEmail(@RequestBody EmailData data) throws Exception {
+    public ResponseEntity<Boolean> findByEmail(@RequestBody EmailData data) {
         Client client = clientService.findByEmail(data.email());
         if(client != null) {
             return ResponseEntity.ok().body(true);
@@ -74,35 +78,44 @@ public class ClientController {
     }
 
     @PutMapping("/{publicId}")
-    @Operation(summary = "Atualiza os dados de um cliente por id", responses = {
+    @Operation(summary = "Atualiza os dados de um cliente por public id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<ClientDto> updateById(@PathVariable String publicId, @RequestBody @Valid ClientData data) throws Exception {
-        ClientDto dto = clientService.updateByPublicId(publicId, data);
+    public ResponseEntity<ClientDto> updateById(@PathVariable String publicId, @RequestBody @Valid ClientData data,
+                                                @RequestHeader("Authorization") String token) throws Exception {
+        ClientDto dto = clientService.updateByPublicId(publicId, data, token);
 
         return ResponseEntity.ok().body(dto);
     }
 
     @PatchMapping("/{publicId}")
-    @Operation(summary = "Reativa a conta de um cliente por id", responses = {
+    @Operation(summary = "Reativa a conta de um cliente por public id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<MessageDto> reactivateById(@PathVariable String publicId) throws Exception {
-        MessageDto dto = clientService.reactivateById(publicId);
+    public ResponseEntity<MessageDto> reactivateById(@PathVariable String publicId,
+                                                     @RequestHeader("Authorization") String token) throws Exception {
+        MessageDto dto = clientService.reactivateById(publicId, token);
 
         return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping("/{publicId}")
-    @Operation(summary = "Deleta um cliente por id", responses = {
+    @Operation(summary = "Deleta um cliente por public id", responses = {
             @ApiResponse(responseCode = "201", description = "Created"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
-    public ResponseEntity<MessageDto> deleteById(@PathVariable String publicId) throws Exception {
-        MessageDto dto = clientService.deleteById(publicId);
+    public ResponseEntity<MessageDto> deleteById(@PathVariable String publicId,
+                                                 @RequestHeader("Authorization") String token) throws Exception {
+        MessageDto dto = clientService.deleteById(publicId, token);
 
         return ResponseEntity.ok().body(dto);
+    }
+
+    @GetMapping("/validate/token")
+    public ResponseEntity<String> getUsername(@RequestBody TokenData data) {
+        String username = clientService.getUsername(data);
+        return ResponseEntity.ok().body(username);
     }
 }
