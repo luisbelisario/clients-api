@@ -118,4 +118,9 @@ public class ClientController {
         String username = clientService.getUsername(data);
         return ResponseEntity.ok().body(username);
     }
+
+    @GetMapping("/healthCheck")
+    public ResponseEntity<?> healthCheck() {
+        return ResponseEntity.ok().build();
+    }
 }
