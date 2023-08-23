@@ -64,16 +64,14 @@ public class ClientController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping("/email")
+    @PostMapping("/email")
     @Operation(summary = "Busca um cliente por email", responses = {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     public ResponseEntity<Boolean> findByEmail(@RequestBody EmailData data) {
         Client client = clientService.findByEmail(data.email());
-        if(client != null) {
-            return ResponseEntity.ok().body(true);
-        }
+        if(client != null) return ResponseEntity.ok().body(true);
         return ResponseEntity.ok().body(false);
     }
 
