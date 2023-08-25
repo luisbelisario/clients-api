@@ -64,16 +64,14 @@ public class ClientController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping("/email")
+    @PostMapping("/email")
     @Operation(summary = "Busca um cliente por email", responses = {
             @ApiResponse(responseCode = "200", description = "Ok"),
             @ApiResponse(responseCode = "400", description = "Bad Request")
     })
     public ResponseEntity<Boolean> findByEmail(@RequestBody EmailData data) {
         Client client = clientService.findByEmail(data.email());
-        if(client != null) {
-            return ResponseEntity.ok().body(true);
-        }
+        if(client != null) return ResponseEntity.ok().body(true);
         return ResponseEntity.ok().body(false);
     }
 
@@ -114,12 +112,20 @@ public class ClientController {
     }
 
     @GetMapping("/validate/token")
+    @Operation(summary = "Valida o token de um usuário", responses = {
+            @ApiResponse(responseCode = "200", description = "Ok"),
+            @ApiResponse(responseCode = "400", description = "Bad Request")
+    })
     public ResponseEntity<String> getUsername(@RequestBody TokenData data) {
         String username = clientService.getUsername(data);
         return ResponseEntity.ok().body(username);
     }
 
     @GetMapping("/healthCheck")
+    @Operation(summary = "Health check da aplicação", responses = {
+            @ApiResponse(responseCode = "200", description = "Ok"),
+            @ApiResponse(responseCode = "500", description = "Erro do servidor")
+    })
     public ResponseEntity<?> healthCheck() {
         return ResponseEntity.ok().build();
     }
