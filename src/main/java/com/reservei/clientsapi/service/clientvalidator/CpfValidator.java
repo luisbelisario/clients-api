@@ -3,21 +3,20 @@ package com.reservei.clientsapi.service.clientvalidator;
 import com.reservei.clientsapi.domain.model.Client;
 import com.reservei.clientsapi.exception.CpfRegisteredException;
 import com.reservei.clientsapi.exception.EmailRegisteredException;
-import com.reservei.clientsapi.service.ClientService;
+import com.reservei.clientsapi.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CpfValidator implements ClientValidator {
 
-    private final ClientService clientService;
+    @Autowired
+    private ClientRepository clientRepository;
 
-    public CpfValidator(ClientService clientService) {
-        this.clientService = clientService;
-    }
 
     @Override
-    public void validate(Client client) throws CpfRegisteredException {
-        if ((clientService.findByCpf(client.getCpf()) != null)){
+    public void validateCreation(Client client) throws CpfRegisteredException {
+        if ((clientRepository.findByCpf(client.getCpf()) != null)){
             throw new CpfRegisteredException("Cpf já cadastrado");
         }
     }
@@ -25,7 +24,7 @@ public class CpfValidator implements ClientValidator {
     @Override
     public void validateUpdate(Client client, Client updatedClient) throws Exception {
         if (!(client.getCpf().equals(updatedClient.getCpf())) &&
-                (clientService.findByCpf(client.getCpf()) != null)) {
+                (clientRepository.findByCpf(client.getCpf()) != null)) {
             throw new EmailRegisteredException("CPF já cadastrado");
         }
     }

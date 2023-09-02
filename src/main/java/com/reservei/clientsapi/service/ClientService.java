@@ -13,14 +13,13 @@ import com.reservei.clientsapi.exception.GenericException;
 import com.reservei.clientsapi.exception.InactiveAccountException;
 import com.reservei.clientsapi.exception.InvalidTokenException;
 import com.reservei.clientsapi.repository.ClientRepository;
-import com.reservei.clientsapi.service.clientvalidator.CpfValidator;
-import com.reservei.clientsapi.service.clientvalidator.EmailValidator;
-import com.reservei.clientsapi.service.clientvalidator.PublicIdValidator;
+import com.reservei.clientsapi.service.clientvalidator.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,15 +31,13 @@ public class ClientService {
     @Autowired
     UserClient userClient;
 
-    private final CpfValidator cpfValidator = new CpfValidator(this);
-    private final EmailValidator emailValidator = new EmailValidator(this);
-
-    private final PublicIdValidator publicIdValidator = new PublicIdValidator(this);
+    @Autowired
+    List<ClientValidator> validators;
 
 
     public ClientDto create(ClientData data) throws Exception {
         Client client = Client.toClient(data);
-        validateCreate(client);
+        validateCreation(client);
         String password = generatePassword(data.password());
         UserData dataUser = new UserData(client.getPublicId(),
                 client.getEmail(), password, client.getRole());
@@ -141,16 +138,16 @@ public class ClientService {
         return MessageDto.toDto("Cliente excluído com sucesso");
     }
 
-    private void validateCreate(Client client) throws Exception {
-        emailValidator.validate(client);
-        cpfValidator.validate(client);
-        publicIdValidator.validate(client);
+    private void validateCreation(Client client) throws Exception {
+        for(ClientValidator validator : validators) {
+            validator.validateCreation(client);
+        }
     }
 
     private void validateUpdate(Client updatedClient, Client client) throws Exception {
-        emailValidator.validateUpdate(client, updatedClient);
-        cpfValidator.validateUpdate(client, updatedClient);
-        publicIdValidator.validateUpdate(client, updatedClient);
+        for(ClientValidator validator : validators) {
+            validator.validateUpdate(client, updatedClient);
+        }
     }
 
     public Client findByEmail(String email) {
