@@ -21,7 +21,7 @@ public class EmailValidator implements ClientValidator {
     }
 
     @Override
-    public void validateUpdate(Client client, Client updatedClient) throws Exception {
+    public void validateUpdate(Client client, Client updatedClient) throws EmailRegisteredException {
         if (!(client.getEmail().equals(updatedClient.getEmail())) &&
                 (clientRepository.findByEmail(client.getEmail()) != null)) {
             throw new EmailRegisteredException("Email já cadastrado");
