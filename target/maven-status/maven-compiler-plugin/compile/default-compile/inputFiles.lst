@@ -15,6 +15,7 @@
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/ClientValidator.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/ClientRepository.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/repository/PersonRepository.java
+/Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/clientvalidator/ClientValidatorConfiguration.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/exception/CpfRegisteredException.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/util/StringUtils.java
 /Users/luissantos/Projetos/clients-api/src/main/java/com/reservei/clientsapi/service/adminValidator/CpfCnpjValidator.java
