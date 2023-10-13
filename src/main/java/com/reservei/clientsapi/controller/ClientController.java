@@ -6,7 +6,6 @@ import com.reservei.clientsapi.domain.model.Client;
 import com.reservei.clientsapi.domain.record.ClientData;
 import com.reservei.clientsapi.domain.record.EmailData;
 import com.reservei.clientsapi.domain.record.TokenData;
-import com.reservei.clientsapi.exception.InvalidTokenException;
 import com.reservei.clientsapi.service.ClientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
